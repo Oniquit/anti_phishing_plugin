@@ -4,7 +4,7 @@
     <title>Phishing Detector</title>
     <style>
       body {
-        width: 200px;
+        width: 250px;
         padding: 10px;
         font-family: Arial, sans-serif;
       }
@@ -12,14 +12,32 @@
         margin-top: 20px;
         font-weight: bold;
       }
+      .btn {
+        display: block;
+        margin-top: 10px;
+        padding: 8px;
+        text-align: center;
+        background: #007BFF;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .list {
+        margin-top: 10px;
+        max-height: 100px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        padding: 5px;
+      }
     </style>
   </head>
   <body>
     <h3>Phishing Detector</h3>
     <div id="status">Checking current page...</div>
-    <div id="help">
-      <a href="https://support.google.com/webmasters/answer/6350487?hl=en">Learn more about phishing</a>
-    </div>
+    <button id="historyBtn" class="btn">Check history</button>
+    <button id="addSiteBtn" class="btn">Add site</button>
+    <select id="siteList" class="list"></select>
+    <button id="removeSiteBtn" class="btn">Delete site</button>
+    <script src="popup.js"></script>
   </body>
-  <script src="popup.js"></script>
 </html>

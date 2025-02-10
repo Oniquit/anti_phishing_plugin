@@ -7,7 +7,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-API_KEY = "AIzaSyAN-gJrtO3pYzVVmoJKaUIZIuJbA_1qhbQ"
+API_KEY = "AIzaSyB94m_6-hFALEHJz8U4csITg2RlFNprTjQ"
 SAFE_BROWSING_URL = (
     f"https://safebrowsing.googleapis.com/v4/threatMatches:find?key={API_KEY}"
 )
@@ -127,6 +127,36 @@ def blocked_sites():
     """
 
     return render_template_string(html_template, urls=rows)
+
+
+@app.route("/add-blocked-site", methods=["POST"])
+def add_blocked_site():
+    data = request.get_json()
+    url = data.get("url")
+    if not url:
+        return jsonify({"error": "No URL provided"}), 400
+
+    try:
+        save_phishing_url(url)
+        return jsonify({"success": True, "message": "Site added to block list"}), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/remove-blocked-site", methods=["POST"])
+def remove_blocked_site():
+    data = request.get_json()
+    url = data.get("url")
+    if not url:
+        return jsonify({"error": "No URL provided"}), 400
+
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM phishing_urls WHERE url = ?", (url,))
+    conn.commit()
+    conn.close()
+
+    return jsonify({"success": True, "message": "Site removed from block list"})
 
 
 if __name__ == "__main__":
