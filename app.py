@@ -7,7 +7,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-API_KEY = "AIzaSyB94m_6-hFALEHJz8U4csITg2RlFNprTjQ"
+API_KEY = "YOUR_API_KEY"
 SAFE_BROWSING_URL = (
     f"https://safebrowsing.googleapis.com/v4/threatMatches:find?key={API_KEY}"
 )
