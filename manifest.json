@@ -1,0 +1,39 @@
+{
+    "manifest_version": 3,
+    "name": "Phishing Detector",
+    "version": "1.0",
+    "description": "Detect phishing websites in real-time.",
+    "permissions": [
+      "activeTab",
+      "storage",
+      "notifications",
+      "tabs",
+      "scripting"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "icons/6169986.png",
+        "48": "icons/6169986.png",
+        "128": "icons/6169986.png"
+      }
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["background.js"]
+      }
+    ],
+    "host_permissions": [
+      "http://*/", "https://*/"
+    ],
+    "icons": {
+      "16": "icons/6169986.png",
+      "48": "icons/6169986.png",
+      "128": "icons/6169986.png"
+    }
+  }
+  
